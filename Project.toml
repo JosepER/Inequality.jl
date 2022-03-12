@@ -1,7 +1,11 @@
 name = "Inequality"
 uuid = "131cd6a8-f02b-4a66-8ce5-0a80ec47b73f"
-authors = ["JosepER <jespasareig@gmail.com> and contributors"]
-version = "0.1.0"
+authors = ["Josep Espasa Reig <jespasareig@gmail.com> and contributors"]
+version = "0.0.1"
+
+[deps]
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
 julia = "1"
