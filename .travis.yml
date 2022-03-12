@@ -12,7 +12,7 @@ julia:
 matrix:
     allow_failures:
 notifications:
-    email: false
+    email: true
 after_success:
     - echo $TRAVIS_JULIA_VERSION
     - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder())'
