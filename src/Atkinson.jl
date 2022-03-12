@@ -37,6 +37,7 @@ end
 
 Compute the weighted Atkinson Index of a vector `v` at a specified inequality 
 aversion parameter `ϵ`, using weights given by a weight vector `w`.
+
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
 
 # Examples

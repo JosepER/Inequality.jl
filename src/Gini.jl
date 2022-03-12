@@ -20,7 +20,9 @@ gini(v::Array{<:Real,1})::Float64 = (2 * sum([x*i for (i,x) in enumerate(sort(v)
 ###### weighted gini #####
 """
     gini(v, w)
+    
 Compute the weighted Gini Coefficient of a vector `v` using weights given by a weight vector `w`.
+
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
 
 # Examples

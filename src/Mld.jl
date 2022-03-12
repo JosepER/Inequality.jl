@@ -19,7 +19,9 @@ mld(v::Array{<:Real,1})::Float64 = log(Statistics.mean(v[v .!= 0])) - Statistics
 ###### weighted mld #####
 """
     mld(v, w)
+    
 Compute the weighted Mean log deviation of a vector `v` using weights given by a weight vector `w`.
+
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
 
 # Examples

@@ -4,6 +4,7 @@
    lorenz(v)
 
 Compute the relative Lorenz Curve of a vector `v` . 
+
 Returns two vectors. The first one contains the cumulative proportion of people. 
 The second contains the cumulative share of income earned.
 
@@ -36,6 +37,7 @@ end
 """
    lorenz(v, w)
 Compute the weighted Lorenz Curve of a vector `v` using weights given by a weight vector `w`.
+
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
 
 Returns two vectors. The first one contains the cumulative proportion of weighted people. 
