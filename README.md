@@ -6,6 +6,13 @@ Inequality.jl is a Julia package that provides functions for the computation of 
 
 [DEVEL](https://joseper.github.io/Inequality.jl/dev/) — documentation of the development version of the package.
 
+## Installation
+To install the package, run the following:
+
+```julia
+Pkg.add("https://github.com/JosepER/Inequality.jl.git")
+```
+
 ## Version
 
 This package is currently in alpha version.
