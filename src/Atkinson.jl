@@ -13,7 +13,6 @@ aversion parameter `ϵ`.
 julia> atkinson([8, 5, 1, 3, 5, 6, 7, 6, 3], 1.2)
 0.1631765870035865
 ```
-
 """
 function atkinson(v::Array{<:Real,1}, ϵ::Real)::Float64
 
@@ -90,6 +89,6 @@ end
 """
     watkinson(v, w, p)
 
-Compute the atkinson index of `v` with weights `w` and inequality aversion parameter 'ϵ'. See the documentation for `atkinson()`
+Compute the atkinson index of `v` with weights `w` and inequality aversion parameter 'ϵ'. See also [`atkinson`](@atkinson)
 """
 watkinson(v::Array{<:Real,1}, w::Array{<:Real,1}, ϵ::Real) = atkinson(v, w, ϵ)

@@ -5,7 +5,7 @@
 """
     mld(v)
 
-Compute the Mean log deviation of a vector `v` .
+Compute the Mean log deviation of a vector `v`.
 
 # Examples
 ```jldoctest
@@ -19,7 +19,7 @@ mld(v::Array{<:Real,1})::Float64 = log(Statistics.mean(v[v .!= 0])) - Statistics
 ###### weighted mld #####
 """
     mld(v, w)
-    
+
 Compute the weighted Mean log deviation of a vector `v` using weights given by a weight vector `w`.
 
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
@@ -42,6 +42,6 @@ end
 """
     wmld(v, w)
 
-Compute the Mean log deviationof `v` with weights `w`. See the documentation for `mld()`
+Compute the Mean log deviationof `v` with weights `w`. See also [`mld`](@mld)
 """
 wmld(v::Array{<:Real,1}, w::Array{<:Real,1}) = mld(v, w)
