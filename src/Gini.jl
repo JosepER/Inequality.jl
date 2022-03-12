@@ -4,7 +4,7 @@
 
 ###### gini #####
 """
-gini(v)
+    gini(v)
 
 Compute the Gini Coefficient of a vector `v` .
 
@@ -19,6 +19,7 @@ gini(v::Array{<:Real,1})::Float64 = (2 * sum([x*i for (i,x) in enumerate(sort(v)
 
 ###### weighted gini #####
 """
+    gini(v, w)
 Compute the weighted Gini Coefficient of a vector `v` using weights given by a weight vector `w`.
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
 
@@ -42,7 +43,7 @@ function gini(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
 end
 
 """
-wgini(v, w)
+    wgini(v, w)
 
 Compute the Gini Coefficient of `v` with weights `w`. See the documentation for `gini()`
 """

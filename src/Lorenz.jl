@@ -1,7 +1,7 @@
 # Lorenz.jl
 
 """
-lorenz(v)
+   lorenz(v)
 
 Compute the relative Lorenz Curve of a vector `v` . 
 Returns two vectors. The first one contains the cumulative proportion of people. 
@@ -33,7 +33,9 @@ function lorenz_curve(v::Array{<:Real,1})
 end
 
 
-"""Compute the weighted Lorenz Curve of a vector `v` using weights given by a weight vector `w`.
+"""
+   lorenz(v, w)
+Compute the weighted Lorenz Curve of a vector `v` using weights given by a weight vector `w`.
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
 
 Returns two vectors. The first one contains the cumulative proportion of weighted people. 
@@ -74,7 +76,7 @@ function lorenz_curve(v::Array{<:Real,1}, w::Array{<:Real,1})
  end
 
  """
- wlorenz_curve(v, w)
+   wlorenz_curve(v, w)
  
  Compute the weighted relative Lorenz Curve of `v` with weights `w`. See the documentation for `lorenz_curve()`
  """

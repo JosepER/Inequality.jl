@@ -3,7 +3,7 @@
 
 ###### atkinson #####
 """
-atkinson(v, ϵ)
+    atkinson(v, ϵ)
 
 Compute the Atkinson Index of a vector `v` at a specified inequality 
 aversion parameter `ϵ`.
@@ -33,7 +33,7 @@ end
 
 ###### weighted atkinson #####
 """
-atkinson(v, w, ϵ)
+    atkinson(v, w, ϵ)
 
 Compute the weighted Atkinson Index of a vector `v` at a specified inequality 
 aversion parameter `ϵ`, using weights given by a weight vector `w`.
@@ -87,7 +87,7 @@ end
 
 
 """
-watkinson(v, w, p)
+    watkinson(v, w, p)
 
 Compute the atkinson index of `v` with weights `w` and inequality aversion parameter 'ϵ'. See the documentation for `atkinson()`
 """
