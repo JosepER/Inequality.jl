@@ -67,3 +67,17 @@ end
     @test mld([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9)) ≈ 0.10375545537468207 atol=0.00000001
     @test mld([8,5,1,3,5], [1, 2, 1, 3, 1]) ≈ mld([8,5,5,1,3,3,3,5]) atol=0.00000001 # same result for probability and frequency weights
 end
+
+@testset "watts checks" begin
+    @test_throws ArgumentError watts([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4], 4)  
+    @test_throws ArgumentError watts([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4], 4)  
+    @test_throws MethodError watts([8, 5, 1, 3, 5], [missing, 0.1, 0.2, 0.3, 0.4], 4)  
+    @test_throws ArgumentError watts([8, 5, 1, 3, 5], [0.1, 0.2, 0.3, 0.4], 4)  # different length `v` and `w`
+end
+
+@testset "watts" begin
+    @test watts([8,5,1,3,5], 4) ≈ watts([8,5,1,3,5], [1,1,1,1,1], 4) atol=0.00000001
+    @test watts([8,5,1,3,5,6,7,6,3], 4) ≈ 0.217962056224828 atol=0.00000001
+    @test watts([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4) ≈ 0.17552777833850716 atol=0.00000001
+    @test watts([8,5,1,3,5], [1, 2, 1, 3, 1], 4) ≈ watts([8,5,5,1,3,3,3,5], 4) atol=0.00000001 # same result for probability and frequency weights
+end

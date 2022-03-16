@@ -10,11 +10,14 @@ module Inequality
         lorenz_curve,
         wlorenz_curve,
         mld,
-        wmld
+        wmld,
+        watts,
+        wwatts
 
     include("Atkinson.jl")
     include("Gini.jl")
     include("Lorenz.jl")
     include("Mld.jl")
+    include("Watts.jl")
 
 end # module

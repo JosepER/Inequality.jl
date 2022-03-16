@@ -1,7 +1,7 @@
 name = "Inequality"
 uuid = "131cd6a8-f02b-4a66-8ce5-0a80ec47b73f"
 authors = ["Josep Espasa Reig <jespasareig@gmail.com> and contributors"]
-version = "0.0.1"
+version = "0.0.2"
 
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
