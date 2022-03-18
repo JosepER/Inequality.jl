@@ -81,3 +81,17 @@ end
     @test watts([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4) ≈ 0.17552777833850716 atol=0.00000001
     @test watts([8,5,1,3,5], [1, 2, 1, 3, 1], 4) ≈ watts([8,5,5,1,3,3,3,5], 4) atol=0.00000001 # same result for probability and frequency weights
 end
+
+@testset "theil checks" begin
+    @test_throws ArgumentError theil([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4])  
+    @test_throws ArgumentError theil([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4])  
+    @test_throws MethodError theil([8, 5, 1, 3, 5], [missing, 0.1, 0.2, 0.3, 0.4])  
+    @test_throws ArgumentError theil([8, 5, 1, 3, 5], [0.1, 0.2, 0.3, 0.4])  # different length `v` and `w`
+end
+
+@testset "theil" begin
+    @test theil([8,5,1,3,5]) ≈ theil([8,5,1,3,5], [1,1,1,1,1]) atol=0.00000001
+    @test theil([8,5,1,3,5,6,7,6,3]) ≈ 0.10494562214323544 atol=0.00000001
+    @test theil([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9)) ≈ 0.08120013911680612 atol=0.00000001
+    @test theil([8,5,1,3,5], [1, 2, 1, 3, 1]) ≈ theil([8,5,5,1,3,3,3,5]) atol=0.00000001 # same result for probability and frequency weights
+end
