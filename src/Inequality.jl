@@ -12,12 +12,15 @@ module Inequality
         mld,
         wmld,
         watts,
-        wwatts
+        wwatts,
+        theil,
+        wtheil
 
     include("Atkinson.jl")
     include("Gini.jl")
     include("Lorenz.jl")
     include("Mld.jl")
     include("Watts.jl")
+    include("Theil.jl")
 
 end # module
