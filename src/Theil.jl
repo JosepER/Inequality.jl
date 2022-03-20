@@ -17,7 +17,7 @@ theil(v::Array{<:Real,1})::Float64 = sum(v .* log.(v/Statistics.mean(v))) / sum(
 
 ###### weighted theil #####
 """
-    watts(v, w)
+    theil(v, w)
 
 Compute the Theil Index of a vector `v`, using weights given by a weight vector `w`.
 
@@ -41,5 +41,11 @@ function theil(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
     return sum(v .* w .* log.(v))
 end
 
+
+"""
+    wtheil(v, w)
+
+Compute the Theil Index of `v` with weights `w`. See also [`theil`](@theil)
+"""
 wtheil(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64 = theil(v,w) 
 

@@ -10,7 +10,6 @@ using Test
     @test_throws ArgumentError atkinson([8, 5, 1, 3, 5], [0.1, 0.2, 0.3, 0.4], 1)  # different length `v` and `w`
 end
 
-
 @testset "atkinson" begin
     @test atkinson([8,5,1,3,5], 1) == atkinson([8,5,1,3,5], [1,1,1,1,1], 1)   
     @test atkinson([8,5,1,3,5], 0.8) == atkinson([8,5,1,3,5], [1,1,1,1,1], 0.8)
@@ -68,6 +67,7 @@ end
     @test mld([8,5,1,3,5], [1, 2, 1, 3, 1]) ≈ mld([8,5,5,1,3,3,3,5]) atol=0.00000001 # same result for probability and frequency weights
 end
 
+
 @testset "watts checks" begin
     @test_throws ArgumentError watts([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4], 4)  
     @test_throws ArgumentError watts([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4], 4)  
@@ -82,6 +82,7 @@ end
     @test watts([8,5,1,3,5], [1, 2, 1, 3, 1], 4) ≈ watts([8,5,5,1,3,3,3,5], 4) atol=0.00000001 # same result for probability and frequency weights
 end
 
+
 @testset "theil checks" begin
     @test_throws ArgumentError theil([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4])  
     @test_throws ArgumentError theil([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4])  
@@ -94,4 +95,21 @@ end
     @test theil([8,5,1,3,5,6,7,6,3]) ≈ 0.10494562214323544 atol=0.00000001
     @test theil([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9)) ≈ 0.08120013911680612 atol=0.00000001
     @test theil([8,5,1,3,5], [1, 2, 1, 3, 1]) ≈ theil([8,5,5,1,3,3,3,5]) atol=0.00000001 # same result for probability and frequency weights
+end
+
+
+@testset "entropy checks" begin
+    @test_throws ArgumentError entropy([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws ArgumentError entropy([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws MethodError entropy([8, 5, 1, 3, 5], [missing, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws ArgumentError entropy([8, 5, 1, 3, 5], [0.1, 0.2, 0.3, 0.4],2)  # different length `v` and `w`
+end
+
+@testset "entropy" begin
+    @test entropy([8,5,1,3,5], 0) ≈ mld([8,5,1,3,5])
+    @test entropy([8,5,1,3,5], 1) ≈ theil([8,5,1,3,5]) 
+    @test entropy([8,5,1,3,5], 2) ≈ entropy([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+    @test entropy([8,5,1,3,5,6,7,6,3], 2) ≈ 0.09039256198347094 atol=0.00000001
+    @test entropy([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 2) ≈ 0.0709746654322026 atol=0.00000001
+    @test entropy([8,5,1,3,5], [1, 2, 1, 3, 1], 2) ≈ entropy([8,5,5,1,3,3,3,5], 2) atol=0.00000001 # same result for probability and frequency weights
 end
