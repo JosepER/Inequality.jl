@@ -42,6 +42,18 @@ function watts(v::Array{<:Real,1}, w::Array{<:Real,1}, α::Real)::Float64
 end
 
 
+function watts(v::Array{<:Real,1}, w::AbstractWeights, α::Real)::Float64
+    
+    checks_weights(v, w)
+
+    length(v) == 0 ? (return 0) : nothing
+    
+    return sum( (log.(α./(v[v .< α]))) .* w[v .< α] ) / sum(w)
+
+end
+
+
+
 """
     wwatts(v, w, α)
 
