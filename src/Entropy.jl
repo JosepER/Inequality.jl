@@ -45,6 +45,22 @@ function gen_entropy(v::Array{<:Real,1},w::Array{<:Real,1}, α::Real)::Float64
 end
 
 
+function gen_entropy(v::Array{<:Real,1},w::AbstractWeights, α::Real)::Float64
+
+    if α == 1
+        return theil(v, w)
+    elseif α == 0
+        return mld(v, w)
+    end
+
+    checks_weights(v, w)  
+
+    return 1/(α * (α - 1)) * sum(((v./(sum(v .* w)/sum(w)) ) .^ α .-1) .* (w/sum(w)))
+
+end
+
+
+
 """
     wgen_entropy(v, w, α)
 
