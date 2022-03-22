@@ -1,7 +1,7 @@
 module Inequality
 
     using Statistics 
-    using StatsBase: mean, weights
+    using StatsBase: mean, AbstractWeights, weights
 
     export 
         atkinson,
@@ -16,8 +16,8 @@ module Inequality
         wwatts,
         theil,
         wtheil,
-        entropy,
-        wentropy
+        gen_entropy,
+        wgen_entropy
 
     include("Atkinson.jl")
     include("Gini.jl")
@@ -26,5 +26,6 @@ module Inequality
     include("Watts.jl")
     include("Theil.jl")
     include("Entropy.jl")
+    include("Misc.jl")
 
 end # module
