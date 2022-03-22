@@ -44,9 +44,25 @@ function gini(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
 
 end
 
+
+function gini(v::Array{<:Real,1}, w::AbstractWeights)::Float64
+
+    checks_weights(v, w)
+
+    w = w[sortperm(v)]/sum(w)
+    sort!(v)
+    p = cumsum(w)
+    n = length(v)
+    nᵤ = cumsum(w .* v)/cumsum(w .* v)[end]
+    sum(nᵤ[2:end] .* p[1:(end-1)]) - sum(nᵤ[1:(end-1)] .* p[2:end])
+
+end
+
+
 """
     wgini(v, w)
 
 Compute the Gini Coefficient of `v` with weights `w`. See also [`gini`](@gini)
 """
 wgini(v::Array{<:Real,1}, w::Array{<:Real,1}) = gini(v, w)
+

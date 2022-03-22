@@ -79,6 +79,30 @@ end
 end 
 
 
+function atkinson(v::Array{<:Real,1}, w::AbstractWeights, ϵ::Real)::Float64
+
+    ϵ >= 0 ? nothing : throw(ArgumentError("`ϵ` must be larger or equal than 0"))
+    checks_weights(v, w)
+   
+    norm_mean!(v)
+    w = w/sum(w)
+ 
+    if ϵ == 1
+        w = w[v .!= 0]
+        v = v[v .!= 0]
+
+        return 1 - (prod(exp.(w .* log.(v)))/sum(v .* w) )
+    elseif ϵ < 1
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
+    else 
+        w = w[v .!= 0]
+        v = v[v .!= 0]
+        
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
+    end
+end
+
+
 """
     watkinson(v, w, p)
 
