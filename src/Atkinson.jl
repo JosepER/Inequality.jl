@@ -57,14 +57,14 @@ function atkinson(v::Array{<:Real,1}, w::Array{<:Real,1}, ϵ::Real)::Float64
         w = w[v .!= 0]
         v = v[v .!= 0]
 
-        return 1 - (prod(exp.(w.*log.(v)))/sum(v .* w/sum(w)) )
+        return 1 - (prod(exp.(w .* log.(v)))/sum(v .* w) )
     elseif ϵ < 1
-        return 1-(sum(((v/sum(v.*w/sum(w))).^(1-ϵ)).*w/sum(w))).^(1/(1-ϵ))
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
     else 
         w = w[v .!= 0]
         v = v[v .!= 0]
         
-        return 1-(sum(((v/sum(v.*w/sum(w))).^(1-ϵ)).*w/sum(w))).^(1/(1-ϵ))
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
     end
 end
 
