@@ -166,3 +166,24 @@ end
     @test poverty_gap([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2) ≈ poverty_gap([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
     @test poverty_gap([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2) ≈ poverty_gap([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
 end
+
+
+@testset "fgt checks" begin
+    @test_throws ArgumentError fgt([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4], 2, 4)  
+    @test_throws ArgumentError fgt([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4],2, 4)  
+    @test_throws MethodError fgt([8, 5, 1, 3, 5], [missing, 0.1, 0.2, 0.3, 0.4],2, 4)  
+    @test_throws ArgumentError fgt([8, 5, 1, 3, 5], [0.1, 0.2, 0.3, 0.4], 2, 4)  # different length `v` and `w`
+end
+
+@testset "fgt" begin
+    @test fgt([8,5,1,3,5], 0, 4) ≈ headcount([8,5,1,3,5], 4)
+    @test fgt([8,5,1,3,5], 1, 4) ≈ poverty_gap([8,5,1,3,5], 4) 
+    @test fgt([8,5,1,3,5], 0, 4) ≈ headcount([8,5,1,3,5], 4)
+    @test fgt([8,5,1,3,5], 1, 4) ≈ poverty_gap([8,5,1,3,5], 4) 
+    @test fgt([8,5,1,3,5], 2, 4) ≈ fgt([8,5,1,3,5], [1,1,1,1,1], 2, 4) atol=0.00000001
+    @test fgt([8,5,1,3,5,6,7,6,3], 2, 4) ≈ 0.0763888888888889 atol=0.00000001
+    @test fgt([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 2, 4) ≈ 0.05555555555555555 atol=0.00000001
+    @test fgt([8,5,1,3,5], [1, 2, 1, 3, 1], 2, 4) ≈ fgt([8,5,5,1,3,3,3,5], 2, 4) atol=0.00000001 # same result for probability and frequency weights
+    @test fgt([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2, 4) ≈ fgt([8,5,1,3,5], [1,1,1,1,1], 2, 4) atol=0.00000001
+    @test fgt([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2, 4) ≈ fgt([8,5,1,3,5], [1,1,1,1,1], 2, 4) atol=0.00000001
+end
