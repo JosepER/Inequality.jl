@@ -132,3 +132,37 @@ end
     @test gen_entropy([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2) ≈ gen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
     @test gen_entropy([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2) ≈ gen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
 end
+
+
+@testset "headcount checks" begin
+    @test_throws ArgumentError headcount([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws ArgumentError headcount([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws MethodError headcount([8, 5, 1, 3, 5], [missing, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws ArgumentError headcount([8, 5, 1, 3, 5], [0.1, 0.2, 0.3, 0.4],2)  # different length `v` and `w`
+end
+
+@testset "headcount" begin
+    @test headcount([8,5,1,3,5,6,7,6,3], 4) ≈ 0.3333333333333333 atol=0.00000001
+    @test headcount([8,5,1,3,5,6,7,6,3], fill(1,9), 4) ≈ 0.3333333333333333 atol=0.00000001
+    @test headcount([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4) ≈ 0.35555555555555557 atol=0.00000001
+    @test headcount([8,5,1,3,5], [1, 2, 1, 3, 1], 2) ≈ headcount([8,5,5,1,3,3,3,5], 2) atol=0.00000001 # same result for probability and frequency weights
+    @test headcount([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2) ≈ headcount([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+    @test headcount([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2) ≈ headcount([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+end
+
+
+@testset "poverty_gap checks" begin
+    @test_throws ArgumentError poverty_gap([8, 5, 1, 3, 5], [-1, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws ArgumentError poverty_gap([8, 5, 1, 3, 5], [NaN, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws MethodError poverty_gap([8, 5, 1, 3, 5], [missing, 0.1, 0.2, 0.3, 0.4],2)  
+    @test_throws ArgumentError poverty_gap([8, 5, 1, 3, 5], [0.1, 0.2, 0.3, 0.4],2)  # different length `v` and `w`
+end
+
+@testset "poverty_gap" begin
+    @test poverty_gap([8,5,1,3,5,6,7,6,3], 4) ≈ 0.1388888888888889 atol=0.00000001
+    @test poverty_gap([8,5,1,3,5,6,7,6,3], fill(1,9), 4) ≈ 0.1388888888888889 atol=0.00000001
+    @test poverty_gap([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4) ≈ 0.1222222222222222 atol=0.00000001
+    @test poverty_gap([8,5,1,3,5], [1, 2, 1, 3, 1], 2) ≈ poverty_gap([8,5,5,1,3,3,3,5], 2) atol=0.00000001 # same result for probability and frequency weights
+    @test poverty_gap([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2) ≈ poverty_gap([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+    @test poverty_gap([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2) ≈ poverty_gap([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+end

@@ -4,7 +4,7 @@
 """
 headcount(v, z)
 
-Compute the headcount ratio of a vector `v` at a specified poverty threshold `z`.
+Compute the Headcount Ratio of a vector `v` at a specified poverty threshold `z`.
 
 # Examples
 ```jldoctest
@@ -19,7 +19,7 @@ headcount(v::Array{<:Real,1}, z::Real)::Float64 = length(v[v .< z]) / length(v)
 """
     headcount(v, w, z)
 
-Compute the headcount ratio of a vector `v` at a specified poverty threshold `z`, 
+Compute the Headcount Ratio of a vector `v` at a specified poverty threshold `z`, 
 using weights given by a weight vector `w`.
 
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
