@@ -5,20 +5,20 @@ Welcome to the Inequality.jl documentation!
 ```@contents
 ```
 
+## Index
+```@index
+```
+
 ## Functions
 ```@docs
 atkinson
 gini
 lorenz_curve
 mld
+gen_entropy
 watts
 theil
-gen_entropy
 fgt
 headcount
 poverty_gap
-```
-
-## Index
-```@index
 ```
