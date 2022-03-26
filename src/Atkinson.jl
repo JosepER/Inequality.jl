@@ -57,24 +57,17 @@ function atkinson(v::Array{<:Real,1}, w::Array{<:Real,1}, ϵ::Real)::Float64
         w = w[v .!= 0]
         v = v[v .!= 0]
 
-        return 1 - (prod(exp.(w.*log.(v)))/sum(v .* w/sum(w)) )
+        return 1 - (prod(exp.(w .* log.(v)))/sum(v .* w) )
     elseif ϵ < 1
-        return 1-(sum(((v/sum(v.*w/sum(w))).^(1-ϵ)).*w/sum(w))).^(1/(1-ϵ))
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
     else 
         w = w[v .!= 0]
         v = v[v .!= 0]
         
-        return 1-(sum(((v/sum(v.*w/sum(w))).^(1-ϵ)).*w/sum(w))).^(1/(1-ϵ))
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
     end
 end
 
-
-function checks_weights(v::Array{<:Real,1}, w::Array{<:Real,1})
-    length(v) == length(w) ? nothing : throw(ArgumentError("`v` and `w` vectors must be the same size, got $(length(v)) and $(length(w))"))
-    any([isnan(x) for x in w]) ? throw(ArgumentError("`w` vector cannot contain NaN values")) : nothing
-    all(w .>= 0) ? nothing : throw(ArgumentError("`w` vector cannot contain negative entries"))
- end
- 
 
 @inline function norm_mean!(x::Array{<:Real,1})::Vector{Float64} 
     x = convert(Vector{Float64}, x)
@@ -84,6 +77,30 @@ function checks_weights(v::Array{<:Real,1}, w::Array{<:Real,1})
     end
     x    
 end 
+
+
+function atkinson(v::Array{<:Real,1}, w::AbstractWeights, ϵ::Real)::Float64
+
+    ϵ >= 0 ? nothing : throw(ArgumentError("`ϵ` must be larger or equal than 0"))
+    checks_weights(v, w)
+   
+    norm_mean!(v)
+    w = w/sum(w)
+ 
+    if ϵ == 1
+        w = w[v .!= 0]
+        v = v[v .!= 0]
+
+        return 1 - (prod(exp.(w .* log.(v)))/sum(v .* w) )
+    elseif ϵ < 1
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
+    else 
+        w = w[v .!= 0]
+        v = v[v .!= 0]
+        
+        return 1-(sum(((v/sum(v.* w)).^(1-ϵ)).*w)).^(1/(1-ϵ))
+    end
+end
 
 
 """

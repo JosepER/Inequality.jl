@@ -78,6 +78,34 @@ function lorenz_curve(v::Array{<:Real,1}, w::Array{<:Real,1})
  
  end
 
+ function lorenz_curve(v::Array{<:Real,1}, w::AbstractWeights)
+
+   checks_weights(v, w)
+
+   v = v .* w
+
+   w = w[sortperm(v)]/sum(w)
+   sort!(v)
+   
+   cumsum!(v,v)
+   cumsum!(w,w)
+
+   cumsum_x = Vector{Float64}(undef, length(v))
+   cumsum_y = Vector{Float64}(undef, length(v))
+
+   @inbounds for (i, (val, wgt)) in enumerate(zip(v, w))
+         
+    cumsum_x[i] = wgt
+    cumsum_y[i] = val/v[end]      
+   end
+
+   pushfirst!(cumsum_x, 0.0)
+   pushfirst!(cumsum_y, 0.0)
+
+   return cumsum_x, cumsum_y
+
+end
+
  """
    wlorenz_curve(v, w)
  

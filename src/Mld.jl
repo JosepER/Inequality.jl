@@ -35,9 +35,17 @@ function mld(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
     w = w[v .!= 0]
     v = v[v .!= 0]
 
-    return -sum(w .* log.(v/mean(v, weights(w))) / sum(w))
+    return -sum(w .* log.(v/mean(v, weights(w))) ) / sum(w)
 end
 
+
+function mld(v::Array{<:Real,1}, w::AbstractWeights)::Float64
+    checks_weights(v, w)
+    w = w[v .!= 0]
+    v = v[v .!= 0]
+
+    return -sum(w .* log.(v/mean(v, weights(w))))/ sum(w)
+end
 
 """
     wmld(v, w)
