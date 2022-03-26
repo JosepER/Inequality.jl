@@ -8,6 +8,7 @@
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> theil([8, 5, 1, 3, 5, 6, 7, 6, 3])
 0.10494562214323544
 ```
@@ -25,6 +26,7 @@ Weights must not be negative, missing or NaN. The weights and data vectors must 
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> theil([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9))
 0.08120013911680612
 ```

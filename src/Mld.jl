@@ -9,6 +9,7 @@ Compute the Mean log deviation of a vector `v`.
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> mld([8, 5, 1, 3, 5, 6, 7, 6, 3])
 0.1397460530936332
 ```
@@ -26,6 +27,7 @@ Weights must not be negative, missing or NaN. The weights and data vectors must 
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> mld([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9))
 0.10375545537468206
 ```

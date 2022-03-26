@@ -10,6 +10,7 @@ aversion parameter `ϵ`.
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> atkinson([8, 5, 1, 3, 5, 6, 7, 6, 3], 1.2)
 0.1631765870035865
 ```
@@ -41,6 +42,7 @@ Weights must not be negative, missing or NaN. The weights and data vectors must 
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> atkinson([8, 5, 1, 3], [0.1,0.5,0.3,0.8], 1.2)
 0.1681319821792493
 ```

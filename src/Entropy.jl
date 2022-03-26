@@ -8,6 +8,7 @@
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> gen_entropy([8, 5, 1, 3, 5, 6, 7, 6, 3], 2)
 0.09039256198347094
 ```
@@ -26,6 +27,7 @@ Weights must not be negative, missing or NaN. The weights and data vectors must 
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> gen_entropy([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9), 2)
 0.0709746654322026
 ```

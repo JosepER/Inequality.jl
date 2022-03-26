@@ -1,6 +1,6 @@
 name = "Inequality"
 uuid = "131cd6a8-f02b-4a66-8ce5-0a80ec47b73f"
-authors = ["Josep Espasa Reig <jespasareig@gmail.com> and contributors"]
+authors = ["Josep Espasa Reig <jespasareig@gmail.com>"]
 version = "0.0.2"
 
 [deps]

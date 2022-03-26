@@ -8,6 +8,7 @@ Compute the Poverty Gap of a vector `v` at a specified poverty threshold `z`.
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> poverty_gap([8, 5, 1, 3, 5, 6, 7, 6, 3], 4)
 0.1388888888888889
 ```
@@ -26,6 +27,7 @@ Weights must not be negative, missing or NaN. The weights and data vectors must 
 
 # Examples
 ```jldoctest
+julia> using Inequality
 julia> poverty_gap([8, 5, 1, 3, 5, 6, 7, 6, 3], [0.1,0.5,0.3,0.8,0.1,0.5,0.3,0.8,0.2], 4)
 0.13194444444444445
 ```
