@@ -16,7 +16,7 @@ theil
 gen_entropy
 fgt
 headcount
-poverty_gap,
+poverty_gap
 ```
 
 ## Index
