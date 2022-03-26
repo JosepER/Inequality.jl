@@ -11,6 +11,12 @@ atkinson
 gini
 lorenz_curve
 mld
+watts
+theil
+gen_entropy
+fgt
+headcount
+poverty_gap,
 ```
 
 ## Index

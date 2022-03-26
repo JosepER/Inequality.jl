@@ -27,7 +27,7 @@ Weights must not be negative, missing or NaN. The weights and data vectors must 
 # Examples
 ```jldoctest
 julia> mld([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9))
-0.10375545537468207
+0.10375545537468206
 ```
 """
 function mld(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
