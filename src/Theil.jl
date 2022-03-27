@@ -7,7 +7,7 @@
     Compute the Theil Index of a vector `v`.
 
 # Examples
-```jldoctest
+```julia
 julia> using Inequality
 julia> theil([8, 5, 1, 3, 5, 6, 7, 6, 3])
 0.10494562214323544
@@ -25,7 +25,7 @@ Compute the Theil Index of a vector `v`, using weights given by a weight vector 
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
 
 # Examples
-```jldoctest
+```julia
 julia> using Inequality
 julia> theil([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9))
 0.08120013911680612
