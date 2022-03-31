@@ -2,7 +2,7 @@
 
 ###### headcount #####
 """
-headcount(v, z)
+    headcount(v, z)
 
 Compute the Headcount Ratio of a vector `v` at a specified poverty threshold `z`.
 
