@@ -12,8 +12,8 @@ using Test
 end
 
 @testset "atkinson" begin
-    @test atkinson([8,5,1,3,5], 1) == atkinson([8,5,1,3,5], [1,1,1,1,1], 1)   
-    @test atkinson([8,5,1,3,5], 0.8) == atkinson([8,5,1,3,5], [1,1,1,1,1], 0.8)
+    @test atkinson([8,5,1,3,5], 1) ≈ atkinson([8,5,1,3,5], [1,1,1,1,1], 1)   atol=0.00000001
+    @test atkinson([8,5,1,3,5], 0.8) ≈ atkinson([8,5,1,3,5], [1,1,1,1,1], 0.8) atol=0.00000001
     @test atkinson([8,5,1,3,5], 1.2) ≈ atkinson([8,5,1,3,5], [1,1,1,1,1], 1.2) atol=0.00000001
     @test atkinson([8,5,1,3,5], 1) ≈ 0.183083677559 atol=0.00000001
     @test atkinson([8,5,1,3,5], 0.8) ≈ 0.14249378376024 atol=0.00000001
