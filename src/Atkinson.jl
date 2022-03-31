@@ -52,7 +52,7 @@ function atkinson(v::Array{<:Real,1}, w::Array{<:Real,1}, ϵ::Real)::Float64
     ϵ >= 0 ? nothing : throw(ArgumentError("`ϵ` must be larger or equal than 0"))
     checks_weights(v, w)
    
-    norm_mean!(v)
+    v = v/Statistics.mean(v)
     w = w/sum(w)
  
     if ϵ == 1
@@ -71,14 +71,6 @@ function atkinson(v::Array{<:Real,1}, w::Array{<:Real,1}, ϵ::Real)::Float64
 end
 
 
-@inline function norm_mean!(x::Array{<:Real,1})::Vector{Float64} 
-    x = convert(Vector{Float64}, x)
-    μx = Statistics.mean(x)
-    for i in 1:length(x)
-        x[i] = x[i]/μx
-    end
-    x    
-end 
 
 
 function atkinson(v::Array{<:Real,1}, w::AbstractWeights, ϵ::Real)::Float64
@@ -86,8 +78,8 @@ function atkinson(v::Array{<:Real,1}, w::AbstractWeights, ϵ::Real)::Float64
     ϵ >= 0 ? nothing : throw(ArgumentError("`ϵ` must be larger or equal than 0"))
     checks_weights(v, w)
    
-    norm_mean!(v)
-    w = w/sum(w)
+    v = v/Statistics.mean(v)
+    w = w/w.sum
  
     if ϵ == 1
         w = w[v .!= 0]
