@@ -6,7 +6,7 @@
 """
     fgt(v, α, z)
 
-Compute the Foster–Greer–Thorbecke index of a vector `v` at a specified `α`
+Compute the Foster–Greer–Thorbecke Index of a vector `v` at a specified `α`
 and a given poverty threshold `z`.
 
 # Examples
@@ -32,7 +32,7 @@ end
 """
     fgt(v, w, α, z)
 
-Compute the Foster–Greer–Thorbecke index of a vector `v` at a specified `α` and 
+Compute the Foster–Greer–Thorbecke Index of a vector `v` at a specified `α` and 
 a given poverty threshold `z`, using weights given by a weight vector `w`.
 
 Weights must not be negative, missing or NaN. The weights and data vectors must have the same length.
