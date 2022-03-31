@@ -51,7 +51,7 @@ function gini(v::Array{<:Real,1}, w::AbstractWeights)::Float64
 
     checks_weights(v, w)
 
-    w = w[sortperm(v)]/sum(w)
+    w = w[sortperm(v)]/w.sum
     sort!(v)
     p = cumsum(w)
     n = length(v)

@@ -51,7 +51,7 @@ function theil(v::Array{<:Real,1}, w::AbstractWeights)::Float64
     w = w[v .!= 0]
     v = v[v .!= 0]
 
-    w = w/sum(w)
+    w = w/w.sum
     v = v / sum(v .* w) 
     return sum(v .* w .* log.(v))
 end

@@ -86,7 +86,7 @@ function lorenz_curve(v::Array{<:Real,1}, w::Array{<:Real,1})
 
    v = v .* w
 
-   w = w[sortperm(v)]/sum(w)
+   w = w[sortperm(v)]/w.sum
    sort!(v)
    
    cumsum!(v,v)
