@@ -4,9 +4,13 @@ using Inequality
 DocMeta.setdocmeta!(Inequality, :DocTestSetup, :(using Inequality); recursive=true)
 
 makedocs(
-    sitename = "Inequality",
+    sitename = "Inequality.jl",
     format = Documenter.HTML(),
-    modules = [Inequality]
+    modules = [Inequality],
+    pages = [
+		"Introduction" => "index.md",
+		"Getting Started" => "gettingstarted.md",
+		"Library" => "library.md"]
 )
 
 # Documenter can also automatically deploy documentation to gh-pages.
