@@ -114,3 +114,5 @@ end
  Compute the weighted relative Lorenz Curve of `v` with weights `w`. See also [`lorenz_curve`](lorenz_curve)
  """
  wlorenz_curve(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}) = lorenz_curve(v, w)
+
+ wlorenz_curve(v::AbstractVector{<:Real}, w::AbstractWeights) = lorenz_curve(v, w)

@@ -62,3 +62,5 @@ end
 Compute the Watts Poverty Index of `v` with weights `w`. See also [`watts`](@watts)
 """
 wwatts(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, α::Real)::Float64 = watts(v, w, α)
+
+wwatts(v::AbstractVector{<:Real}, w::AbstractWeights, α::Real)::Float64 = watts(v, w, α)

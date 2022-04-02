@@ -70,3 +70,13 @@ function fgt(v::AbstractVector{<:Real}, w::AbstractWeights, α::Real, z::Real)::
         return sum(((1 .- (v[v .< z] /z)).^α) .* w[v .< z] )/ w.sum
     end
 end
+
+
+"""
+wfgt(v, w)
+
+Compute the Foster–Greer–Thorbecke Index of `v` with weights `w`. See also [`fgt`](@fgt)
+"""
+wfgt(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, α::Real, z::Real)::Float64 = fgt(v, w, α, z)
+
+wfgt(v::AbstractVector{<:Real}, w::AbstractWeights, α::Real, z::Real)::Float64 = fgt(v, w, α, z)

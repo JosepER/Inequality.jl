@@ -64,3 +64,4 @@ Compute the Theil Index of `v` with weights `w`. See also [`theil`](@theil)
 """
 wtheil(v::AbstractVector{<:Real}, w::AbstractVector{<:Real})::Float64 = theil(v,w) 
 
+wtheil(v::AbstractVector{<:Real}, w::AbstractWeights)::Float64 = theil(v,w) 

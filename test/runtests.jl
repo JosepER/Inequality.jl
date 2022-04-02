@@ -64,6 +64,8 @@ end
     @test gini([8,5,1,3,5], [1, 2, 1, 3, 1]) ≈ gini([8,5,5,1,3,3,3,5]) atol=0.00000001 # same result for probability and frequency weights
     @test gini([8,5,1,3,5], StatsBase.weights([1,1,1,1,1])) ≈ gini([8,5,1,3,5], [1,1,1,1,1]) atol=0.00000001
     @test gini([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1])) ≈ gini([8,5,1,3,5], [1,1,1,1,1]) atol=0.00000001
+    @test wgini([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9)) ≈ gini([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))
+    @test wgini([8,5,1,3,5,6,7,6,3], weights(collect(0.1:0.1:0.9))) ≈ gini([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))
 end
 
 @testset "gini with DataFrames" begin
@@ -74,8 +76,6 @@ end
     @test combine(groupby(df_2, :group), [:v, :w] => (x, y) -> gini(x, y))[!,:v_w_function][1] ≈ gini([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))
     # @test combine(groupby(df_2, :group), [:v, :w] => (x, y) -> gini(x, weights(y)))[!,:v_w_function][1] ≈ gini([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9)) broken=true    
 end
-
-
 
 
 @testset "lorenz_curve checks" begin
@@ -92,6 +92,8 @@ end
     @test all(lorenz_curve([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))[2] .≈ [0.0, 0.013761467889908256, 0.05045871559633028, 0.0963302752293578, 0.1513761467889908, 0.2660550458715596, 0.38990825688073394, 0.555045871559633, 0.7752293577981653, 1.0])
     @test all(lorenz_curve([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]))[2] ≈ lorenz_curve([8,5,1,3,5], [1,1,1,1,1])[2])
     @test all(lorenz_curve([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]))[2] ≈ lorenz_curve([8,5,1,3,5], [1,1,1,1,1])[2])
+    @test all(wlorenz_curve([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))[2] .≈ [0.0, 0.013761467889908256, 0.05045871559633028, 0.0963302752293578, 0.1513761467889908, 0.2660550458715596, 0.38990825688073394, 0.555045871559633, 0.7752293577981653, 1.0])
+    @test all(wlorenz_curve([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]))[2] ≈ lorenz_curve([8,5,1,3,5], [1,1,1,1,1])[2])
 end
 
 @testset "lorenz_curve with DataFrames" begin
@@ -117,6 +119,8 @@ end
     @test mld([8,5,1,3,5], [1, 2, 1, 3, 1]) ≈ mld([8,5,5,1,3,3,3,5]) atol=0.00000001 # same result for probability and frequency weights
     @test mld([8,5,1,3,5], StatsBase.weights([1,1,1,1,1])) ≈ mld([8,5,1,3,5], [1,1,1,1,1]) atol=0.00000001
     @test mld([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1])) ≈ mld([8,5,1,3,5], [1,1,1,1,1]) atol=0.00000001
+    @test wmld([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9)) ≈ mld([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))
+    @test wmld([8,5,1,3,5,6,7,6,3], StatsBase.weights(collect(0.1:0.1:0.9))) ≈ mld([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))
 end
 
 @testset "mld with DataFrames" begin
@@ -142,6 +146,8 @@ end
     @test watts([8,5,1,3,5], [1, 2, 1, 3, 1], 4) ≈ watts([8,5,5,1,3,3,3,5], 4) atol=0.00000001 # same result for probability and frequency weights
     @test watts([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 4) ≈ watts([8,5,1,3,5], [1,1,1,1,1], 4) atol=0.00000001
     @test watts([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 4) ≈ watts([8,5,1,3,5], [1,1,1,1,1], 4) atol=0.00000001
+    @test wwatts([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4) ≈ watts([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4)
+    @test wwatts([8,5,1,3,5,6,7,6,3], weights(collect(0.1:0.1:0.9)), 4) ≈ watts([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4)
 end
 
 @testset "watts with DataFrames" begin
@@ -168,6 +174,8 @@ end
     @test theil([8,5,1,3,5], [1, 2, 1, 3, 1]) ≈ theil([8,5,5,1,3,3,3,5]) atol=0.00000001 # same result for probability and frequency weights
     @test theil([8,5,1,3,5], StatsBase.weights([1,1,1,1,1])) ≈ theil([8,5,1,3,5], [1,1,1,1,1]) atol=0.00000001
     @test theil([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1])) ≈ theil([8,5,1,3,5], [1,1,1,1,1]) atol=0.00000001
+    @test wtheil([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9)) ≈ theil([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))
+    @test wtheil([8,5,1,3,5,6,7,6,3], weights(collect(0.1:0.1:0.9))) ≈ theil([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9))
 end
 
 @testset "theil with DataFrames" begin
@@ -200,6 +208,7 @@ end
     @test gen_entropy([8,5,1,3,5],  StatsBase.weights(collect(0.1:0.1:0.5)), 0) ≈ mld([8,5,1,3,5],collect(0.1:0.1:0.5))
     @test gen_entropy([8,5,1,3,5], StatsBase.weights(collect(0.1:0.1:0.5)), 1) ≈ theil([8,5,1,3,5],collect(0.1:0.1:0.5)) 
     @test wgen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) ≈ gen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+    @test wgen_entropy([8,5,1,3,5], weights(collect(0.1:0.1:0.5)), 2) ≈ gen_entropy([8,5,1,3,5], collect(0.1:0.1:0.5), 2)
 end
 
 @testset "gen_entropy with DataFrames" begin
@@ -256,6 +265,8 @@ end
     @test poverty_gap([8,5,1,3,5], [1, 2, 1, 3, 1], 2) ≈ poverty_gap([8,5,5,1,3,3,3,5], 2) atol=0.00000001 # same result for probability and frequency weights
     @test poverty_gap([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2) ≈ poverty_gap([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
     @test poverty_gap([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2) ≈ poverty_gap([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+    @test wpoverty_gap([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4) ≈ poverty_gap([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4)
+    @test wpoverty_gap([8,5,1,3,5,6,7,6,3], weights(collect(0.1:0.1:0.9)), 4) ≈ poverty_gap([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 4)
 end
 
 @testset "poverty_gap with DataFrames" begin
@@ -285,6 +296,8 @@ end
     @test fgt([8,5,1,3,5], [1, 2, 1, 3, 1], 2, 4) ≈ fgt([8,5,5,1,3,3,3,5], 2, 4) atol=0.00000001 # same result for probability and frequency weights
     @test fgt([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2, 4) ≈ fgt([8,5,1,3,5], [1,1,1,1,1], 2, 4) atol=0.00000001
     @test fgt([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2, 4) ≈ fgt([8,5,1,3,5], [1,1,1,1,1], 2, 4) atol=0.00000001
+    @test wfgt([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 2, 4) ≈ fgt([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 2, 4)
+    @test wfgt([8,5,1,3,5,6,7,6,3], weights(collect(0.1:0.1:0.9)), 2, 4) ≈ fgt([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 2, 4)
 end
 
 @testset "fgt with DataFrames" begin

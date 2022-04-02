@@ -49,9 +49,12 @@ function mld(v::AbstractVector{<:Real}, w::AbstractWeights)::Float64
     return -sum(w .* log.(v/mean(v, weights(w))))/ sum(w)
 end
 
+
 """
     wmld(v, w)
 
 Compute the Mean log deviationof `v` with weights `w`. See also [`mld`](@mld)
 """
 wmld(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}) = mld(v, w)
+
+wmld(v::AbstractVector{<:Real}, w::AbstractWeights) = mld(v, w)

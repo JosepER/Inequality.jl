@@ -68,3 +68,4 @@ Compute the Gini Coefficient of `v` with weights `w`. See also [`gini`](@gini)
 """
 wgini(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}) = gini(v, w)
 
+wgini(v::AbstractVector{<:Real}, w::AbstractWeights) = gini(v, w)
