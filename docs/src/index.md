@@ -17,7 +17,7 @@ Inequality.jl provides functions to compute inequality and poverty indicators. I
 
 ## Author
 
-Josep Espasa Reig, Data Scientist at LIS - Cross-National Data Center in Luxembourg.
+Josep Espasa Reig - Data Scientist at LIS Cross-National Data Center in Luxembourg.
 
 ## Installation
 
