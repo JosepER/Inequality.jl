@@ -191,8 +191,13 @@ end
     @test gen_entropy([8,5,1,3,5,6,7,6,3], 2) ≈ 0.09039256198347094 atol=0.00000001
     @test gen_entropy([8,5,1,3,5,6,7,6,3], collect(0.1:0.1:0.9), 2) ≈ 0.0709746654322026 atol=0.00000001
     @test gen_entropy([8,5,1,3,5], [1, 2, 1, 3, 1], 2) ≈ gen_entropy([8,5,5,1,3,3,3,5], 2) atol=0.00000001 # same result for probability and frequency weights
+    @test gen_entropy([8,5,1,3,5], collect(0.1:0.1:0.5), 0) ≈ mld([8,5,1,3,5],collect(0.1:0.1:0.5))
+    @test gen_entropy([8,5,1,3,5], collect(0.1:0.1:0.5), 1) ≈ theil([8,5,1,3,5],collect(0.1:0.1:0.5)) 
     @test gen_entropy([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2) ≈ gen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
     @test gen_entropy([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2) ≈ gen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+    @test gen_entropy([8,5,1,3,5],  StatsBase.weights(collect(0.1:0.1:0.5)), 0) ≈ mld([8,5,1,3,5],collect(0.1:0.1:0.5))
+    @test gen_entropy([8,5,1,3,5], StatsBase.weights(collect(0.1:0.1:0.5)), 1) ≈ theil([8,5,1,3,5],collect(0.1:0.1:0.5)) 
+    @test wgen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) ≈ gen_entropy([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
 end
 
 @testset "gen_entropy with DataFrames" begin
