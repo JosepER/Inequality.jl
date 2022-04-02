@@ -35,6 +35,8 @@ end
     @test atkinson([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 0.8) ≈ atkinson([8,5,1,3,5], [1,1,1,1,1], 0.8) atol=0.00000001
     @test atkinson([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 1.2) ≈ atkinson([8,5,1,3,5], [1,1,1,1,1], 1.2) atol=0.00000001
     @test atkinson([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 1.2) ≈ atkinson([8,5,1,3,5], [1,1,1,1,1], 1.2) atol=0.00000001
+    @test watkinson([8,5,1,3,5], [1, 2, 1, 3, 1], 1) ≈ atkinson([8,5,1,3,5], [1, 2, 1, 3, 1], 1)
+    @test watkinson([8,5,1,3,5], weights([1, 2, 1, 3, 1]), 1) ≈ atkinson([8,5,1,3,5], [1, 2, 1, 3, 1], 1)
 end
 
 @testset "atkinson with DataFrames" begin
@@ -227,6 +229,8 @@ end
     @test headcount([8,5,1,3,5], [1, 2, 1, 3, 1], 2) ≈ headcount([8,5,5,1,3,3,3,5], 2) atol=0.00000001 # same result for probability and frequency weights
     @test headcount([8,5,1,3,5], StatsBase.weights([1,1,1,1,1]), 2) ≈ headcount([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
     @test headcount([8,5,1,3,5], StatsBase.pweights([1,1,1,1,1]), 2) ≈ headcount([8,5,1,3,5], [1,1,1,1,1], 2) atol=0.00000001
+    @test wheadcount([8,5,1,3,5], [1, 2, 1, 3, 1], 2) ≈ headcount([8,5,5,1,3,3,3,5], 2) atol=0.00000001
+    @test wheadcount([8,5,1,3,5], StatsBase.pweights([1, 2, 1, 3, 1]), 2) ≈ headcount([8,5,5,1,3,3,3,5], 2) atol=0.00000001
 end
 
 @testset "headcount with DataFrames" begin
