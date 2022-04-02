@@ -68,7 +68,6 @@ end
 
 Compute the Generalized Entropy Index of `v` with weights `w` at a specified parameter `α`. See also [`gen_entropy`](gen_entropy)
 """
-wgen_entropy(v::AbstractVector{<:Real},w::AbstractVector{<:Real}, α::Real)::Float64 = entropy(v,w,α)
+wgen_entropy(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, α::Real)::Float64 = gen_entropy(v,w,α)
 
-
-
+wgen_entropy(v::AbstractVector{<:Real},  w::AbstractWeights, α::Real)::Float64 = gen_entropy(v,w,α)

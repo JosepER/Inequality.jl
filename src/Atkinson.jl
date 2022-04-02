@@ -103,3 +103,5 @@ end
 Compute the atkinson index of `v` with weights `w` and inequality aversion parameter 'ϵ'. See also [`atkinson`](@atkinson)
 """
 watkinson(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, ϵ::Real) = atkinson(v, w, ϵ)
+
+watkinson(v::AbstractVector{<:Real}, w::AbstractWeights, ϵ::Real) = atkinson(v, w, ϵ)
