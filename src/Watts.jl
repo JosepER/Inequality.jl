@@ -14,7 +14,7 @@ julia> watts([8, 5, 1, 3, 5, 6, 7, 6, 3], 4)
 0.217962056224828
 ```
 """
-watts(v::Array{<:Real,1}, k::Real)::Float64 = length(v[v .< k]) == 0 ?  0. : sum(log.(k./v[v .< k]))/length(v)
+watts(v::AbstractVector{<:Real}, k::Real)::Float64 = length(v[v .< k]) == 0 ?  0. : sum(log.(k./v[v .< k]))/length(v)
 
 
 ###### weighted watts #####
@@ -33,7 +33,7 @@ julia> watts([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9), 4)
 0.17552777833850716
 ```
 """
-function watts(v::Array{<:Real,1}, w::Array{<:Real,1}, α::Real)::Float64
+function watts(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, α::Real)::Float64
     
     checks_weights(v, w)
 
@@ -44,7 +44,7 @@ function watts(v::Array{<:Real,1}, w::Array{<:Real,1}, α::Real)::Float64
 end
 
 
-function watts(v::Array{<:Real,1}, w::AbstractWeights, α::Real)::Float64
+function watts(v::AbstractVector{<:Real}, w::AbstractWeights, α::Real)::Float64
     
     checks_weights(v, w)
 
@@ -61,4 +61,4 @@ end
 
 Compute the Watts Poverty Index of `v` with weights `w`. See also [`watts`](@watts)
 """
-wwatts(v::Array{<:Real,1}, w::Array{<:Real,1}, α::Real)::Float64 = watts(v, w, α)
+wwatts(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, α::Real)::Float64 = watts(v, w, α)

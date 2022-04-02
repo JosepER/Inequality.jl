@@ -16,7 +16,7 @@ julia> fgt([8, 5, 1, 3, 5, 6, 7, 6, 3], 2, 4)
 0.0763888888888889
 ```
 """
-function fgt(v::Array{<:Real,1}, α::Real, z::Real)::Float64
+function fgt(v::AbstractVector{<:Real}, α::Real, z::Real)::Float64
     
     if α == 0
         return headcount(v, z)
@@ -44,7 +44,7 @@ julia> fgt([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9), 2, 4)
 0.05555555555555555
 ```
 """
-function fgt(v::Array{<:Real,1}, w::Array{<:Real,1}, α::Real, z::Real)::Float64
+function fgt(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, α::Real, z::Real)::Float64
     
     if α == 0
         return headcount(v, w, z)
@@ -58,7 +58,7 @@ function fgt(v::Array{<:Real,1}, w::Array{<:Real,1}, α::Real, z::Real)::Float64
 end
 
 
-function fgt(v::Array{<:Real,1}, w::AbstractWeights, α::Real, z::Real)::Float64
+function fgt(v::AbstractVector{<:Real}, w::AbstractWeights, α::Real, z::Real)::Float64
     
     if α == 0
         return headcount(v, w, z)

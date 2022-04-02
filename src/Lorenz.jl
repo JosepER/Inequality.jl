@@ -16,8 +16,8 @@ julia> lorenz_curve([8, 5, 1, 3, 5, 6, 7, 6, 3])
 │ [0.0, 0.022727272727272728, 0.09090909090909091, 0.1590909090909091, 0.2727272727272727, 0.38636363636363635, 0.5227272727272727, 0.6590909090909091, 0.8181818181818182, 1.0])
 ``` 
 """
-function lorenz_curve(v::Array{<:Real,1})
-   sort!(v)
+function lorenz_curve(v::AbstractVector{<:Real})
+   v = sort(v)
    cumsum!(v,v)
    cumsum_x = Vector{Float64}(undef, length(v))
    cumsum_y = Vector{Float64}(undef, length(v))
@@ -52,7 +52,7 @@ julia> lorenz_curve([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9))
 [0.0, 0.013761467889908256, 0.05045871559633028, 0.0963302752293578, 0.1513761467889908, 0.2660550458715596, 0.38990825688073394, 0.555045871559633, 0.7752293577981653, 1.0])
 ``` 
 """
-function lorenz_curve(v::Array{<:Real,1}, w::Array{<:Real,1})
+function lorenz_curve(v::AbstractVector{<:Real}, w::AbstractVector{<:Real})
 
     checks_weights(v, w)
 
@@ -80,7 +80,7 @@ function lorenz_curve(v::Array{<:Real,1}, w::Array{<:Real,1})
  
  end
 
- function lorenz_curve(v::Array{<:Real,1}, w::AbstractWeights)
+ function lorenz_curve(v::AbstractVector{<:Real}, w::AbstractWeights)
 
    checks_weights(v, w)
 
@@ -113,4 +113,4 @@ end
  
  Compute the weighted relative Lorenz Curve of `v` with weights `w`. See also [`lorenz_curve`](lorenz_curve)
  """
- wlorenz_curve(v::Array{<:Real,1}, w::Array{<:Real,1}) = lorenz_curve(v, w)
+ wlorenz_curve(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}) = lorenz_curve(v, w)

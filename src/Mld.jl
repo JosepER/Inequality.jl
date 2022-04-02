@@ -14,7 +14,7 @@ julia> mld([8, 5, 1, 3, 5, 6, 7, 6, 3])
 0.1397460530936332
 ```
 """
-mld(v::Array{<:Real,1})::Float64 = log(Statistics.mean(v[v .!= 0])) - Statistics.mean(log.(v[v .!= 0]))
+mld(v::AbstractVector{<:Real})::Float64 = log(Statistics.mean(v[v .!= 0])) - Statistics.mean(log.(v[v .!= 0]))
 
 
 ###### weighted mld #####
@@ -32,7 +32,7 @@ julia> mld([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9))
 0.10375545537468206
 ```
 """
-function mld(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
+function mld(v::AbstractVector{<:Real}, w::AbstractVector{<:Real})::Float64
     checks_weights(v, w)
     w = w[v .!= 0]
     v = v[v .!= 0]
@@ -41,7 +41,7 @@ function mld(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
 end
 
 
-function mld(v::Array{<:Real,1}, w::AbstractWeights)::Float64
+function mld(v::AbstractVector{<:Real}, w::AbstractWeights)::Float64
     checks_weights(v, w)
     w = w[v .!= 0]
     v = v[v .!= 0]
@@ -54,4 +54,4 @@ end
 
 Compute the Mean log deviationof `v` with weights `w`. See also [`mld`](@mld)
 """
-wmld(v::Array{<:Real,1}, w::Array{<:Real,1}) = mld(v, w)
+wmld(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}) = mld(v, w)

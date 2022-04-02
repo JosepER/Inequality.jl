@@ -13,7 +13,7 @@ julia> theil([8, 5, 1, 3, 5, 6, 7, 6, 3])
 0.10494562214323544
 ```
 """
-theil(v::Array{<:Real,1})::Float64 = sum(v .* log.(v/Statistics.mean(v))) / sum(v)
+theil(v::AbstractVector{<:Real})::Float64 = sum(v .* log.(v/Statistics.mean(v))) / sum(v)
 
 
 ###### weighted theil #####
@@ -31,7 +31,7 @@ julia> theil([8, 5, 1, 3, 5, 6, 7, 6, 3], collect(0.1:0.1:0.9))
 0.08120013911680612
 ```
 """
-function theil(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
+function theil(v::AbstractVector{<:Real}, w::AbstractVector{<:Real})::Float64
     
     checks_weights(v, w)
 
@@ -44,7 +44,7 @@ function theil(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64
 end
 
 
-function theil(v::Array{<:Real,1}, w::AbstractWeights)::Float64
+function theil(v::AbstractVector{<:Real}, w::AbstractWeights)::Float64
     
     checks_weights(v, w)
 
@@ -62,5 +62,5 @@ end
 
 Compute the Theil Index of `v` with weights `w`. See also [`theil`](@theil)
 """
-wtheil(v::Array{<:Real,1}, w::Array{<:Real,1})::Float64 = theil(v,w) 
+wtheil(v::AbstractVector{<:Real}, w::AbstractVector{<:Real})::Float64 = theil(v,w) 
 

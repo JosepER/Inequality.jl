@@ -15,7 +15,7 @@ julia> atkinson([8, 5, 1, 3, 5, 6, 7, 6, 3], 1.2)
 0.1631765870035865
 ```
 """
-function atkinson(v::Array{<:Real,1}, ϵ::Real)::Float64
+function atkinson(v::AbstractVector{<:Real}, ϵ::Real)::Float64
 
     ϵ >= 0 ? nothing : throw(ArgumentError("`ϵ` must be larger or equal than 0"))
 
@@ -47,7 +47,7 @@ julia> atkinson([8, 5, 1, 3], [0.1,0.5,0.3,0.8], 1.2)
 0.1681319821792493
 ```
 """
-function atkinson(v::Array{<:Real,1}, w::Array{<:Real,1}, ϵ::Real)::Float64
+function atkinson(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, ϵ::Real)::Float64
 
     ϵ >= 0 ? nothing : throw(ArgumentError("`ϵ` must be larger or equal than 0"))
     checks_weights(v, w)
@@ -73,7 +73,7 @@ end
 
 
 
-function atkinson(v::Array{<:Real,1}, w::AbstractWeights, ϵ::Real)::Float64
+function atkinson(v::AbstractVector{<:Real}, w::AbstractWeights, ϵ::Real)::Float64
 
     ϵ >= 0 ? nothing : throw(ArgumentError("`ϵ` must be larger or equal than 0"))
     checks_weights(v, w)
@@ -102,4 +102,4 @@ end
 
 Compute the atkinson index of `v` with weights `w` and inequality aversion parameter 'ϵ'. See also [`atkinson`](@atkinson)
 """
-watkinson(v::Array{<:Real,1}, w::Array{<:Real,1}, ϵ::Real) = atkinson(v, w, ϵ)
+watkinson(v::AbstractVector{<:Real}, w::AbstractVector{<:Real}, ϵ::Real) = atkinson(v, w, ϵ)
