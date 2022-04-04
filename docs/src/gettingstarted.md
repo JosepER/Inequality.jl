@@ -1,5 +1,5 @@
 # User Guide
-[`Inequality.jl`]("https://github.com/JosepER/Inequality.jl") provides functions to compute income and wealth inequality estimates. This guide will show how to use them. 
+`Inequality.jl` provides functions to compute income and wealth inequality estimates. This guide will show how to use them. 
 
 ## Weighted and unweighted estimates
 All the functions in the package provide methods to compute both weighted and unweighted estimates. The details of the functions can be seen in the [Library](https://joseper.github.io/Inequality.jl/dev/library/#Functions) section of the documentation. 
