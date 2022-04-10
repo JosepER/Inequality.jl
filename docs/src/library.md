@@ -4,6 +4,9 @@
 Pages = ["library.md"]
 ```
 
+```@index
+```
+
 ```@docs
 atkinson
 gini

@@ -26,11 +26,17 @@ To install the package, run the following:
 ```julia
 using Pkg
 
-Pkg.add(url = "https://github.com/JosepER/Inequality.jl.git")
+Pkg.add("Inequality")
 ```
 
 ## Use
 See the Getting Started section for a guide to the package and examples.
+
+## Acknowledgements
+
+This package wouldn’t have been possible without the contributions of:
+
+* Pedro Salas-Rojo, Research Fellow at the London School of Economics
 
 
 
