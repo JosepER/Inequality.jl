@@ -1,6 +1,6 @@
 # Inequality.jl
 
-Inequality.jl is a Julia package that provides functions for the computation of inequality indicators. Examples of these a the Gini Coefficient, Atkinson Index, Lorenz Curve and Mean log deviation.
+`Inequality.jl` is a Julia package that provides functions for the computation of inequality indicators. Examples of these a the Gini Coefficient, Atkinson Index, Lorenz Curve and Mean log deviation.
 
 ## Build & Testing Status
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -14,7 +14,7 @@ Inequality.jl is a Julia package that provides functions for the computation of 
 To install the package, run the following:
 
 ```julia
-Pkg.add(url = "https://github.com/JosepER/Inequality.jl.git")
+using Pkg; Pkg.add("Inequality") 
 ```
 
 ## Version
