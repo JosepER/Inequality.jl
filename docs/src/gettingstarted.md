@@ -77,7 +77,7 @@ combine(df, [:v, :w] => (x, y) -> gini(x, y) )
 
 ```
 
-Below you cn see an example of `Inequality.jl` functions working with a `GroupedDataFrame`.
+Below you can see an example of `Inequality.jl` functions working with a `GroupedDataFrame`.
 
 ```julia
 group = vcat(repeat(["a"], 10), repeat(["b"], 10))
