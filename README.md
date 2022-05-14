@@ -19,5 +19,5 @@ using Pkg; Pkg.add("Inequality")
 
 ## Version
 
-This package is currently in alpha version.
+This package is currently in beta version.
 
