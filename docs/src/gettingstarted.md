@@ -46,7 +46,7 @@ atkinson(v, w, 2) # weighted
 
 ## Passing a DataFrame or GroupedDataFrame
 
-The package functions can also work using a `DataFrame` or a grouped `DataFrame` (i.e. `GroupedDataFrame` type object).
+The package functions also work using `DataFrame` or `GroupedDataFrame`.
 
 The following example shows how to use `DataFrames.combine()` to produce the Gini Coefficient of a `DataFrame` column `v`.
 
@@ -77,7 +77,7 @@ combine(df, [:v, :w] => (x, y) -> gini(x, y) )
 
 ```
 
-The `Inequality.jl` functions can also be used with a `GroupedDataFrame`.
+Below you cn see an example of `Inequality.jl` functions working with a `GroupedDataFrame`.
 
 ```julia
 group = vcat(repeat(["a"], 10), repeat(["b"], 10))
