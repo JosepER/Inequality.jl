@@ -18,6 +18,9 @@ using Pkg; Pkg.add("Inequality")
 ```
 
 ## Version
-
 This package is currently in beta version.
+
+## Performance benchmarks
+See the author's [presentation](https://github.com/JosepER/ntts2023_julia_for_official_statistics) at the NTTS 2023 conference for speed and memory comparisons with similar R functions. 
+
 
